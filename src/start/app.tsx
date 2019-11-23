@@ -26,20 +26,31 @@ const initialState = [
   }
 ];
 
-const Test = (props: { label: String }) => {
+const Todo = (props: { title: string, completed: boolean }) => {
   return (
     <div>
-      <p><strong>{props.label}</strong></p>
+      {props.completed ? '✅' : '❌'}
+      {props.title}
     </div>
+  )
+}
+
+const Todos = (props: { items: any }) => {
+  return (
+    <ul>
+      {props.items.map((item: any) => (
+        <li key={item.id}>
+          <Todo title={item.title} completed={item.completed} />
+        </li>
+      ))}
+    </ul>
   )
 }
 
 export const App = () => {
   return (
     <div className="container">
-      <Test label='ahoj' />
-      <h1>Hello world!</h1>
-      <pre>{JSON.stringify(initialState, null, 2)}</pre>
+      <Todos items={initialState} />
     </div>
   );
 };
