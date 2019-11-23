@@ -63,33 +63,49 @@ const Click = () => {
   );
 }
 
-const AddNewTodoForm = () => {
+const AddNewTodoForm = (props: { onAdd: (value: string) => void }) => {
+  const [value, setValue] = useState('');
   return (
     <form
-      onSubmit={() => { alert('submitted') }}
+      onSubmit={ev => {
+        ev.preventDefault()
+        props.onAdd(value)
+        setValue('')
+      }}
     >
       <input
         type='text'
         className='input'
         placeholder='what?'
+        value={value}
+        onChange={ev => setValue(ev.target.value)}
       />
       <br />
       <button type='submit'>Add</button>
-
     </form>
   )
 }
 
 export const App = () => {
   const [todos, setTodos] = useState(initialState);
-
-
-
   return (
     <div className="container">
       <Click />
       <Todos items={todos} />
-      <AddNewTodoForm />
+      <AddNewTodoForm
+        onAdd={(value: string) => {
+          setTodos(
+            [
+              ...todos,
+              {
+                id: uuidv4(),
+                completed: false,
+                title: value
+              }
+            ]
+          )
+        }}
+      />
     </div>
   );
 };
