@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { uuidv4 } from './shared';
 
 import './app.css';
+import { AddTodo } from '../finish/todo-manager/add-todo';
 
 const initialState = [
   {
@@ -64,10 +65,26 @@ const Click = () => {
 
 
 export const App = () => {
+  const [todos, setTodos] = useState(initialState);
+
+
+
   return (
     <div className="container">
       <Click />
-      <Todos items={initialState} />
+      <Todos items={todos} />
+      <input
+        type='text'
+        className='input'
+        placeholder='what?'
+        onClick={(ev) => { alert('input: ' + ev.currentTarget.value) }}
+      />
+      <button
+
+        onClick={(ev) => { alert('tlacitko') }}
+      >
+        Add
+      </button>
     </div>
   );
 };
