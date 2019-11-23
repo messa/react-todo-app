@@ -63,6 +63,22 @@ const Click = () => {
   );
 }
 
+const AddNewTodoForm = () => {
+  return (
+    <form
+      onSubmit={() => { alert('submitted') }}
+    >
+      <input
+        type='text'
+        className='input'
+        placeholder='what?'
+      />
+      <br />
+      <button type='submit'>Add</button>
+
+    </form>
+  )
+}
 
 export const App = () => {
   const [todos, setTodos] = useState(initialState);
@@ -73,18 +89,7 @@ export const App = () => {
     <div className="container">
       <Click />
       <Todos items={todos} />
-      <input
-        type='text'
-        className='input'
-        placeholder='what?'
-        onClick={(ev) => { alert('input: ' + ev.currentTarget.value) }}
-      />
-      <button
-
-        onClick={(ev) => { alert('tlacitko') }}
-      >
-        Add
-      </button>
+      <AddNewTodoForm />
     </div>
   );
 };
