@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState } from 'react';
 import { uuidv4 } from './shared';
 
 import './app.css';
@@ -47,9 +48,25 @@ const Todos = (props: { items: any }) => {
   )
 }
 
+const Click = () => {
+  // Declare a new state variable, which we'll call "count"
+  const [count, setCount] = useState(0);
+  // const state: count = 1;
+  return (
+    <div>
+      <p>You clicked {count} times</p>
+      <button onClick={() => setCount(count + 1)}>
+        Click me
+      </button>
+    </div>
+  );
+}
+
+
 export const App = () => {
   return (
     <div className="container">
+      <Click />
       <Todos items={initialState} />
     </div>
   );
