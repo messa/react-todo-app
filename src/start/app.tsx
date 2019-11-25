@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { uuidv4 } from './shared';
 
 import './app.css';
-import { AddTodo } from '../finish/todo-manager/add-todo';
+//import { AddTodo } from '../finish/todo-manager/add-todo';
 
 const initialState = [
   {
@@ -69,7 +69,9 @@ const AddNewTodoForm = (props: { onAdd: (value: string) => void }) => {
     <form
       onSubmit={ev => {
         ev.preventDefault()
-        props.onAdd(value)
+        if (value !== '') {
+          props.onAdd(value)
+        }
         setValue('')
       }}
     >
@@ -78,10 +80,19 @@ const AddNewTodoForm = (props: { onAdd: (value: string) => void }) => {
         className='input'
         placeholder='what?'
         value={value}
-        onChange={ev => setValue(ev.target.value)}
+        onChange={ev => {
+          setValue(ev.target.value)
+          //console.info(ev.target.value)
+        }}
       />
       <br />
-      <button type='submit'>Add</button>
+      <button
+        type='submit'
+        className='btn'
+        style={{ backgroundColor: '#eee' }}
+      >
+        Add
+      </button>
     </form>
   )
 }
